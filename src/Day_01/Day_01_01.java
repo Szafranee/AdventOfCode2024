@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class taks_01_01 {
+public class Day_01_01 {
     public static void main(String[] args) {
         ArrayList<Integer> locationsA = new ArrayList<>();
         ArrayList<Integer> locationsB = new ArrayList<>();
