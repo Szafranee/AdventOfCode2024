@@ -65,42 +65,7 @@ public class Day_05_01 {
             Set<Integer> printedPages = new HashSet<>();
             boolean isValidUpdate = true;
 
-            for (int page : update) {
-                List<Map.Entry<Integer, Integer>> printAfterRules = rules.stream()
-                        .filter((entry) -> entry.getKey() == page)
-                        .toList();
-
-                List<Map.Entry<Integer, Integer>> printBeforeRules = rules.stream()
-                        .filter((entry) -> entry.getValue() == page)
-                        .toList();
-
-               for (var rule : printAfterRules) {
-                   if (!printedPages.contains(rule.getValue())) {
-                       if (rule == printAfterRules.getLast()) {
-                           printedPages.add(page);
-                       }
-                   } else  {
-                       isValidUpdate = false;
-                       break;
-                   }
-               }
-
-                for (var rule : printBeforeRules) {
-                    if (!printedPages.contains(rule.getKey()) && update.contains(rule.getKey())) {
-                        isValidUpdate = false;
-                        break;
-                    } else {
-                        if (rule == printBeforeRules.getLast()) {
-                            printedPages.add(page);
-                        }
-                    }
-                }
-
-                if (!isValidUpdate) {
-                    break;
-                }
-
-            }
+            isValidUpdate = checkIfUpdateValid(rules, update, printedPages, true);
 
             if (isValidUpdate) {
                 correctUpdates.add(update);
@@ -108,6 +73,46 @@ public class Day_05_01 {
         }
 
         return correctUpdates;
+    }
+
+    private static boolean checkIfUpdateValid(List<Map.Entry<Integer, Integer>> rules, List<Integer> update, Set<Integer> printedPages, boolean isValidUpdate) {
+        for (int page : update) {
+            List<Map.Entry<Integer, Integer>> printAfterRules = rules.stream()
+                    .filter((entry) -> entry.getKey() == page)
+                    .toList();
+
+            List<Map.Entry<Integer, Integer>> printBeforeRules = rules.stream()
+                    .filter((entry) -> entry.getValue() == page)
+                    .toList();
+
+           for (var rule : printAfterRules) {
+               if (!printedPages.contains(rule.getValue())) {
+                   if (rule == printAfterRules.getLast()) {
+                       printedPages.add(page);
+                   }
+               } else  {
+                   isValidUpdate = false;
+                   break;
+               }
+           }
+
+            for (var rule : printBeforeRules) {
+                if (!printedPages.contains(rule.getKey()) && update.contains(rule.getKey())) {
+                    isValidUpdate = false;
+                    break;
+                } else {
+                    if (rule == printBeforeRules.getLast()) {
+                        printedPages.add(page);
+                    }
+                }
+            }
+
+            if (!isValidUpdate) {
+                break;
+            }
+
+        }
+        return isValidUpdate;
     }
 
     public static int sumMiddlePages(List<List<Integer>> updatesToSum) {
