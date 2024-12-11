@@ -7,22 +7,9 @@ import java.util.List;
 
 public class Day_06_01 {
     public static void main(String[] args) {
-        Path dataFilePath = Path.of("src/Day_06/data_06.txt");
-        List<String> linesInFile;
-
-        try {
-            linesInFile = Files.readAllLines(dataFilePath);
-        } catch (IOException e) {
-            e.printStackTrace();
+        char[][] labMap = getLabMap("src/Day_06/data_06.txt");
+        if (labMap == null) {
             return;
-        }
-
-        int numRows = linesInFile.size();
-        int numCols = linesInFile.getFirst().length();
-        char[][] labMap = new char[numRows][numCols];
-
-        for (int i = 0; i < numRows; i++) {
-            labMap[i] = linesInFile.get(i).toCharArray();
         }
 
         int guardPositions = countGuardPositions(labMap);
@@ -30,7 +17,7 @@ public class Day_06_01 {
         System.out.println("Number of guard positions: " + guardPositions);
     }
 
-    public static int countGuardPositions(char[][] labMap) {
+    private static int countGuardPositions(char[][] labMap) {
         int guardStartPosY;
         int guardStartPosX;
 
@@ -58,7 +45,8 @@ public class Day_06_01 {
                             direction = "right";
                         } else {
                             guardPosY--;
-                            labMap[guardPosY][guardPosX] = 'X';}
+                            labMap[guardPosY][guardPosX] = 'X';
+                        }
                     }
                     case "right" -> {
                         if (labMap[guardPosY][guardPosX + 1] == '#') {
@@ -86,7 +74,6 @@ public class Day_06_01 {
                     }
                 }
             } catch (IndexOutOfBoundsException _) {
-//                System.out.println("Guard has reached the end of the map");
                 break;
             }
         }
@@ -104,7 +91,28 @@ public class Day_06_01 {
         return xCount;
     }
 
-    private static int[] findGuardStartPosition(char[][] labMap) {
+    static char[][] getLabMap(String filePath) {
+        Path dataFilePath = Path.of(filePath);
+        List<String> linesInFile;
+
+        try {
+            linesInFile = Files.readAllLines(dataFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        int numRows = linesInFile.size();
+        int numCols = linesInFile.getFirst().length();
+        char[][] labMap = new char[numRows][numCols];
+
+        for (int i = 0; i < numRows; i++) {
+            labMap[i] = linesInFile.get(i).toCharArray();
+        }
+        return labMap;
+    }
+
+    static int[] findGuardStartPosition(char[][] labMap) {
         for (int i = 0; i < labMap.length; i++) {
             for (int j = 0; j < labMap[i].length; j++) {
                 if (labMap[i][j] == '^') {
