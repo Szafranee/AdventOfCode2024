@@ -85,16 +85,16 @@ public class Day_05_01 {
                     .filter((entry) -> entry.getValue() == page)
                     .toList();
 
-           for (var rule : printAfterRules) {
-               if (!printedPages.contains(rule.getValue())) {
-                   if (rule == printAfterRules.getLast()) {
-                       printedPages.add(page);
-                   }
-               } else  {
-                   isValidUpdate = false;
-                   break;
-               }
-           }
+            for (var rule : printAfterRules) {
+                if (!printedPages.contains(rule.getValue())) {
+                    if (rule == printAfterRules.getLast()) {
+                        printedPages.add(page);
+                    }
+                } else {
+                    isValidUpdate = false;
+                    break;
+                }
+            }
 
             for (var rule : printBeforeRules) {
                 if (!printedPages.contains(rule.getKey()) && update.contains(rule.getKey())) {

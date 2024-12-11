@@ -15,9 +15,9 @@ public class Day_03_01 {
             while ((line = bufferedReader.readLine()) != null) {
                 Matcher mulMatcher = Pattern.compile("mul\\(\\d{1,3},\\d{1,3}\\)").matcher(line);
 
-               while (mulMatcher.find()) {
-                   correctMuls.add(mulMatcher.group());
-               }
+                while (mulMatcher.find()) {
+                    correctMuls.add(mulMatcher.group());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
