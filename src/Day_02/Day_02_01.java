@@ -1,8 +1,8 @@
 package Day_02;
 
+import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.io.BufferedReader;
 import java.util.Arrays;
 
 public class Day_02_01 {

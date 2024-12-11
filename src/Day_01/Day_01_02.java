@@ -2,7 +2,6 @@ package Day_01;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
-
 import java.util.HashMap;
 
 public class Day_01_02 {
