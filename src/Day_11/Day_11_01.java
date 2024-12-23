@@ -10,7 +10,7 @@ public class Day_11_01 {
     public static void main(String[] args) {
         List<Long> stones = getStones("src/Day_11/data_11.txt");
 
-        List<Long> finalStones = applyRulesNTimes(stones, 75);
+        List<Long> finalStones = applyRulesNTimes(stones, 25);
 
         int stonesCount = finalStones.size();
 
