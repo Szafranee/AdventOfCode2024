@@ -15,8 +15,6 @@ public class Day_09_01 {
             System.exit(1);
         }
 
-        System.out.println(line);
-
         char[] lineCharArray = line.toCharArray();
 
         ArrayList<Integer> diskMap = mapToDiskMap(lineCharArray);
@@ -57,7 +55,7 @@ public class Day_09_01 {
         }
     }
 
-    private static ArrayList<Integer> mapToDiskMap(char[] lineCharArray) {
+    static ArrayList<Integer> mapToDiskMap(char[] lineCharArray) {
         ArrayList<Integer> diskMap = new ArrayList<>();
         int fileId = 0;
         for (int i = 0; i < lineCharArray.length; i++) {
